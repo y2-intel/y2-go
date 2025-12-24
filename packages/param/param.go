@@ -2,7 +2,7 @@ package param
 
 import (
 	"encoding/json"
-	"github.com/stainless-sdks/y2-go/internal/encoding/json/sentinel"
+	"github.com/y2-intel/y2-go/internal/encoding/json/sentinel"
 	"reflect"
 )
 

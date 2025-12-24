@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"net/http/httputil"
 
-	"github.com/stainless-sdks/y2-go/internal/apijson"
-	"github.com/stainless-sdks/y2-go/packages/respjson"
+	"github.com/y2-intel/y2-go/internal/apijson"
+	"github.com/y2-intel/y2-go/packages/respjson"
 )
 
 // Error represents an error that originates from the API, i.e. when a request is

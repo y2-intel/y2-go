@@ -2,7 +2,7 @@ package apiform
 
 import (
 	"bytes"
-	"github.com/stainless-sdks/y2-go/packages/param"
+	"github.com/y2-intel/y2-go/packages/param"
 	"io"
 	"mime/multipart"
 	"strings"

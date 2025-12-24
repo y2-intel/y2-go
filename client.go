@@ -8,8 +8,8 @@ import (
 	"os"
 	"slices"
 
-	"github.com/stainless-sdks/y2-go/internal/requestconfig"
-	"github.com/stainless-sdks/y2-go/option"
+	"github.com/y2-intel/y2-go/internal/requestconfig"
+	"github.com/y2-intel/y2-go/option"
 )
 
 // Client creates a struct with services and top level methods that help with

@@ -1,8 +1,8 @@
 package sentinel_test
 
 import (
-	"github.com/stainless-sdks/y2-go/internal/encoding/json/sentinel"
-	"github.com/stainless-sdks/y2-go/packages/param"
+	"github.com/y2-intel/y2-go/internal/encoding/json/sentinel"
+	"github.com/y2-intel/y2-go/packages/param"
 	"reflect"
 	"slices"
 	"testing"

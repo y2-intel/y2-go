@@ -1,4 +1,4 @@
-module github.com/stainless-sdks/y2-go
+module github.com/y2-intel/y2-go
 
 go 1.22
 

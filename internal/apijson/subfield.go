@@ -1,7 +1,7 @@
 package apijson
 
 import (
-	"github.com/stainless-sdks/y2-go/packages/respjson"
+	"github.com/y2-intel/y2-go/packages/respjson"
 	"reflect"
 )
 
