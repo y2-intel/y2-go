@@ -3,8 +3,8 @@ package apijson_test
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/stainless-sdks/y2-go/internal/apijson"
-	"github.com/stainless-sdks/y2-go/packages/param"
+	"github.com/y2-intel/y2-go/internal/apijson"
+	"github.com/y2-intel/y2-go/packages/param"
 	"reflect"
 	"testing"
 )

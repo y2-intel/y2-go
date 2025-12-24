@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/stainless-sdks/y2-go/packages/param"
+	"github.com/y2-intel/y2-go/packages/param"
 )
 
 var encoders sync.Map // map[reflect.Type]encoderFunc
