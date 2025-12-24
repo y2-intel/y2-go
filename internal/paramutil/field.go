@@ -1,8 +1,8 @@
 package paramutil
 
 import (
-	"github.com/stainless-sdks/y2-go/packages/param"
-	"github.com/stainless-sdks/y2-go/packages/respjson"
+	"github.com/y2-intel/y2-go/packages/param"
+	"github.com/y2-intel/y2-go/packages/respjson"
 )
 
 func AddrIfPresent[T comparable](v param.Opt[T]) *T {

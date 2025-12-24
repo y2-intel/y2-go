@@ -2,7 +2,7 @@ package param_test
 
 import (
 	"encoding/json"
-	"github.com/stainless-sdks/y2-go/packages/param"
+	"github.com/y2-intel/y2-go/packages/param"
 	"testing"
 )
 

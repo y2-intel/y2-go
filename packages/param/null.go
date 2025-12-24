@@ -1,6 +1,6 @@
 package param
 
-import "github.com/stainless-sdks/y2-go/internal/encoding/json/sentinel"
+import "github.com/y2-intel/y2-go/internal/encoding/json/sentinel"
 
 // NullMap returns a non-nil map with a length of 0.
 // When used with [MarshalObject] or [MarshalUnion], it will be marshaled as null.

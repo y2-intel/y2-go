@@ -7,9 +7,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stainless-sdks/y2-go"
-	"github.com/stainless-sdks/y2-go/internal/testutil"
-	"github.com/stainless-sdks/y2-go/option"
+	"github.com/y2-intel/y2-go"
+	"github.com/y2-intel/y2-go/internal/testutil"
+	"github.com/y2-intel/y2-go/option"
 )
 
 func TestUsage(t *testing.T) {

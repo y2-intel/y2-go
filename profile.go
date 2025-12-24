@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"slices"
 
-	"github.com/stainless-sdks/y2-go/internal/apijson"
-	"github.com/stainless-sdks/y2-go/internal/requestconfig"
-	"github.com/stainless-sdks/y2-go/option"
-	"github.com/stainless-sdks/y2-go/packages/respjson"
+	"github.com/y2-intel/y2-go/internal/apijson"
+	"github.com/y2-intel/y2-go/internal/requestconfig"
+	"github.com/y2-intel/y2-go/option"
+	"github.com/y2-intel/y2-go/packages/respjson"
 )
 
 // ProfileService contains methods and other services that help with interacting

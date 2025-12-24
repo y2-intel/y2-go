@@ -11,12 +11,12 @@ import (
 	"slices"
 	"time"
 
-	"github.com/stainless-sdks/y2-go/internal/apijson"
-	"github.com/stainless-sdks/y2-go/internal/apiquery"
-	"github.com/stainless-sdks/y2-go/internal/requestconfig"
-	"github.com/stainless-sdks/y2-go/option"
-	"github.com/stainless-sdks/y2-go/packages/param"
-	"github.com/stainless-sdks/y2-go/packages/respjson"
+	"github.com/y2-intel/y2-go/internal/apijson"
+	"github.com/y2-intel/y2-go/internal/apiquery"
+	"github.com/y2-intel/y2-go/internal/requestconfig"
+	"github.com/y2-intel/y2-go/option"
+	"github.com/y2-intel/y2-go/packages/param"
+	"github.com/y2-intel/y2-go/packages/respjson"
 )
 
 // ReportService contains methods and other services that help with interacting

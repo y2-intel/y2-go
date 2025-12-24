@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stainless-sdks/y2-go"
-	"github.com/stainless-sdks/y2-go/internal"
-	"github.com/stainless-sdks/y2-go/option"
+	"github.com/y2-intel/y2-go"
+	"github.com/y2-intel/y2-go/internal"
+	"github.com/y2-intel/y2-go/option"
 )
 
 type closureTransport struct {
