@@ -6,7 +6,7 @@
 
 <!-- x-release-please-end -->
 
-The Y2 Go library provides convenient access to the [Y2 REST API](https://y2.yeetum.com)
+The Y2 Go library provides convenient access to the [Y2 REST API](https://y2.dev/docs/)
 from applications written in Go.
 
 It is generated with [Stainless](https://www.stainless.com/).
