@@ -6,7 +6,7 @@
 
 <!-- x-release-please-end -->
 
-The Y2 Go library provides convenient access to the [Y2 REST API](https://y2.yeetum.com)
+The Y2 Go library provides convenient access to the [Y2 REST API](https://y2.dev/docs/)
 from applications written in Go.
 
 It is generated with [Stainless](https://www.stainless.com/).
@@ -28,7 +28,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/y2-intel/y2-go@v0.0.2'
+go get -u 'github.com/y2-intel/y2-go@v0.1.0'
 ```
 
 <!-- x-release-please-end -->
