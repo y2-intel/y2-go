@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2025-12-31)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/y2-intel/y2-go/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([84b49f9](https://github.com/y2-intel/y2-go/commit/84b49f9c6a294a72bd394fed5695d26276aaab35))
+
 ## 0.1.0 (2025-12-28)
 
 Full Changelog: [v0.0.2...v0.1.0](https://github.com/y2-intel/y2-go/compare/v0.0.2...v0.1.0)
