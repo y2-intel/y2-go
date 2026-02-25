@@ -98,8 +98,8 @@ const (
 )
 
 type NewsListResponse struct {
-	Data []NewsListResponseData `json:"data,required"`
-	Meta NewsListResponseMeta   `json:"meta,required"`
+	Data []NewsListResponseData `json:"data" api:"required"`
+	Meta NewsListResponseMeta   `json:"meta" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -116,12 +116,12 @@ func (r *NewsListResponse) UnmarshalJSON(data []byte) error {
 }
 
 type NewsListResponseData struct {
-	ID string `json:"id,required"`
+	ID string `json:"id" api:"required"`
 	// Primary signal/headline
-	Signal string `json:"signal,required"`
+	Signal string `json:"signal" api:"required"`
 	// Unix timestamp (seconds)
-	Timestamp    int64     `json:"timestamp,required"`
-	TimestampISO time.Time `json:"timestampISO,required" format:"date-time"`
+	Timestamp    int64     `json:"timestamp" api:"required"`
+	TimestampISO time.Time `json:"timestampISO" api:"required" format:"date-time"`
 	Author       string    `json:"author"`
 	Categories   []string  `json:"categories"`
 	// Full context
@@ -130,7 +130,7 @@ type NewsListResponseData struct {
 	// Sentiment classification for news items
 	//
 	// Any of "bullish", "bearish", "neutral".
-	Sentiment      string   `json:"sentiment,nullable"`
+	Sentiment      string   `json:"sentiment" api:"nullable"`
 	SentimentValue float64  `json:"sentimentValue"`
 	Sources        []string `json:"sources"`
 	// Short context summary
@@ -186,8 +186,8 @@ func (r *NewsListResponseMeta) UnmarshalJSON(data []byte) error {
 }
 
 type NewsGetRecapsResponse struct {
-	Data map[string]any            `json:"data,required"`
-	Meta NewsGetRecapsResponseMeta `json:"meta,required"`
+	Data map[string]any            `json:"data" api:"required"`
+	Meta NewsGetRecapsResponseMeta `json:"meta" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -225,8 +225,8 @@ func (r *NewsGetRecapsResponseMeta) UnmarshalJSON(data []byte) error {
 }
 
 type NewsListFeedsResponse struct {
-	Data []NewsListFeedsResponseData `json:"data,required"`
-	Meta NewsListFeedsResponseMeta   `json:"meta,required"`
+	Data []NewsListFeedsResponseData `json:"data" api:"required"`
+	Meta NewsListFeedsResponseMeta   `json:"meta" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -248,9 +248,9 @@ type NewsListFeedsResponseData struct {
 	// Any of "ai", "ai_agents", "aptos", "base", "bitcoin", "crypto", "dats", "defi",
 	// "ethereum", "hyperliquid", "machine_learning", "macro", "ondo", "perps",
 	// "ripple", "rwa", "solana", "tech", "virtuals".
-	ID TopicEnum `json:"id,required"`
+	ID TopicEnum `json:"id" api:"required"`
 	// Human-readable name
-	Name string `json:"name,required"`
+	Name string `json:"name" api:"required"`
 	// Feed description
 	Description string `json:"description"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
