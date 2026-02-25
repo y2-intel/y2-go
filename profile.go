@@ -95,8 +95,8 @@ func (r *ProfileService) PartialUpdate(ctx context.Context, profileID string, bo
 }
 
 type ProfileNewResponse struct {
-	Data ProfileNewResponseData `json:"data,required"`
-	Meta ProfileNewResponseMeta `json:"meta,required"`
+	Data ProfileNewResponseData `json:"data" api:"required"`
+	Meta ProfileNewResponseMeta `json:"meta" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -114,7 +114,7 @@ func (r *ProfileNewResponse) UnmarshalJSON(data []byte) error {
 
 type ProfileNewResponseData struct {
 	// The ID of the newly created profile
-	ProfileID string `json:"profileId,required"`
+	ProfileID string `json:"profileId" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ProfileID   respjson.Field
@@ -146,8 +146,8 @@ func (r *ProfileNewResponseMeta) UnmarshalJSON(data []byte) error {
 }
 
 type ProfileUpdateResponse struct {
-	Data ProfileUpdateResponseData `json:"data,required"`
-	Meta ProfileUpdateResponseMeta `json:"meta,required"`
+	Data ProfileUpdateResponseData `json:"data" api:"required"`
+	Meta ProfileUpdateResponseMeta `json:"meta" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -164,8 +164,8 @@ func (r *ProfileUpdateResponse) UnmarshalJSON(data []byte) error {
 }
 
 type ProfileUpdateResponseData struct {
-	ProfileID string `json:"profileId,required"`
-	Success   bool   `json:"success,required"`
+	ProfileID string `json:"profileId" api:"required"`
+	Success   bool   `json:"success" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ProfileID   respjson.Field
@@ -198,8 +198,8 @@ func (r *ProfileUpdateResponseMeta) UnmarshalJSON(data []byte) error {
 }
 
 type ProfileListResponse struct {
-	Data []ProfileListResponseData `json:"data,required"`
-	Meta ProfileListResponseMeta   `json:"meta,required"`
+	Data []ProfileListResponseData `json:"data" api:"required"`
+	Meta ProfileListResponseMeta   `json:"meta" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -217,12 +217,12 @@ func (r *ProfileListResponse) UnmarshalJSON(data []byte) error {
 
 type ProfileListResponseData struct {
 	// Any of "email", "sms", "webhook", "both_email_sms".
-	DeliveryMethod string                         `json:"deliveryMethod,required"`
-	IsActive       bool                           `json:"isActive,required"`
-	ProfileID      string                         `json:"profileId,required"`
-	SubscribedAt   int64                          `json:"subscribedAt,required"`
-	SubscriptionID string                         `json:"subscriptionId,required"`
-	Profile        ProfileListResponseDataProfile `json:"profile,nullable"`
+	DeliveryMethod string                         `json:"deliveryMethod" api:"required"`
+	IsActive       bool                           `json:"isActive" api:"required"`
+	ProfileID      string                         `json:"profileId" api:"required"`
+	SubscribedAt   int64                          `json:"subscribedAt" api:"required"`
+	SubscriptionID string                         `json:"subscriptionId" api:"required"`
+	Profile        ProfileListResponseDataProfile `json:"profile" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		DeliveryMethod respjson.Field
@@ -283,8 +283,8 @@ func (r *ProfileListResponseMeta) UnmarshalJSON(data []byte) error {
 }
 
 type ProfileDeleteResponse struct {
-	Data ProfileDeleteResponseData `json:"data,required"`
-	Meta ProfileDeleteResponseMeta `json:"meta,required"`
+	Data ProfileDeleteResponseData `json:"data" api:"required"`
+	Meta ProfileDeleteResponseMeta `json:"meta" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -301,8 +301,8 @@ func (r *ProfileDeleteResponse) UnmarshalJSON(data []byte) error {
 }
 
 type ProfileDeleteResponseData struct {
-	Deleted   bool   `json:"deleted,required"`
-	ProfileID string `json:"profileId,required"`
+	Deleted   bool   `json:"deleted" api:"required"`
+	ProfileID string `json:"profileId" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Deleted     respjson.Field
@@ -335,8 +335,8 @@ func (r *ProfileDeleteResponseMeta) UnmarshalJSON(data []byte) error {
 }
 
 type ProfilePartialUpdateResponse struct {
-	Data ProfilePartialUpdateResponseData `json:"data,required"`
-	Meta ProfilePartialUpdateResponseMeta `json:"meta,required"`
+	Data ProfilePartialUpdateResponseData `json:"data" api:"required"`
+	Meta ProfilePartialUpdateResponseMeta `json:"meta" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -353,8 +353,8 @@ func (r *ProfilePartialUpdateResponse) UnmarshalJSON(data []byte) error {
 }
 
 type ProfilePartialUpdateResponseData struct {
-	ProfileID string `json:"profileId,required"`
-	Success   bool   `json:"success,required"`
+	ProfileID string `json:"profileId" api:"required"`
+	Success   bool   `json:"success" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ProfileID   respjson.Field
@@ -390,13 +390,13 @@ type ProfileNewParams struct {
 	// Report generation frequency
 	//
 	// Any of "daily", "weekly", "biweekly", "monthly".
-	Frequency ProfileNewParamsFrequency `json:"frequency,omitzero,required"`
+	Frequency ProfileNewParamsFrequency `json:"frequency,omitzero" api:"required"`
 	// Profile display name
-	Name string `json:"name,required"`
+	Name string `json:"name" api:"required"`
 	// Time of day for report generation (HH:mm, UTC)
-	ScheduleTimeOfDay string `json:"scheduleTimeOfDay,required"`
+	ScheduleTimeOfDay string `json:"scheduleTimeOfDay" api:"required"`
 	// Topic description for research
-	Topic string `json:"topic,required"`
+	Topic string `json:"topic" api:"required"`
 	// Custom BLUF report structure template
 	BlufStructure param.Opt[string] `json:"blufStructure,omitzero"`
 	// Custom system prompt for the AI analyst
@@ -433,10 +433,10 @@ const (
 
 // The properties Enabled, MaxDepth, Strategy are required.
 type ProfileNewParamsRecursionConfig struct {
-	Enabled  bool  `json:"enabled,required"`
-	MaxDepth int64 `json:"maxDepth,required"`
+	Enabled  bool  `json:"enabled" api:"required"`
+	MaxDepth int64 `json:"maxDepth" api:"required"`
 	// Any of "breadth-first", "depth-first", "hybrid".
-	Strategy string `json:"strategy,omitzero,required"`
+	Strategy string `json:"strategy,omitzero" api:"required"`
 	paramObj
 }
 
@@ -564,10 +564,10 @@ func (r *ProfileUpdateParamsModelConfig) UnmarshalJSON(data []byte) error {
 
 // The properties Enabled, MaxDepth, Strategy are required.
 type ProfileUpdateParamsRecursionConfig struct {
-	Enabled  bool  `json:"enabled,required"`
-	MaxDepth int64 `json:"maxDepth,required"`
+	Enabled  bool  `json:"enabled" api:"required"`
+	MaxDepth int64 `json:"maxDepth" api:"required"`
 	// Any of "breadth-first", "depth-first", "hybrid".
-	Strategy string `json:"strategy,omitzero,required"`
+	Strategy string `json:"strategy,omitzero" api:"required"`
 	paramObj
 }
 
@@ -729,10 +729,10 @@ func (r *ProfilePartialUpdateParamsModelConfig) UnmarshalJSON(data []byte) error
 
 // The properties Enabled, MaxDepth, Strategy are required.
 type ProfilePartialUpdateParamsRecursionConfig struct {
-	Enabled  bool  `json:"enabled,required"`
-	MaxDepth int64 `json:"maxDepth,required"`
+	Enabled  bool  `json:"enabled" api:"required"`
+	MaxDepth int64 `json:"maxDepth" api:"required"`
 	// Any of "breadth-first", "depth-first", "hybrid".
-	Strategy string `json:"strategy,omitzero,required"`
+	Strategy string `json:"strategy,omitzero" api:"required"`
 	paramObj
 }
 
