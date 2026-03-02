@@ -243,20 +243,46 @@ func (r *ProfileListResponseData) UnmarshalJSON(data []byte) error {
 }
 
 type ProfileListResponseDataProfile struct {
-	AudioEnabled bool   `json:"audioEnabled"`
-	Frequency    string `json:"frequency"`
-	Name         string `json:"name"`
-	Status       string `json:"status"`
-	Topic        string `json:"topic"`
+	AudioEnabled       bool     `json:"audioEnabled"`
+	BlufStructure      string   `json:"blufStructure"`
+	BrandingTemplateID string   `json:"brandingTemplateId"`
+	BudgetConfig       any      `json:"budgetConfig"`
+	CronConfig         any      `json:"cronConfig"`
+	CustomPrompt       string   `json:"customPrompt"`
+	Frequency          string   `json:"frequency"`
+	FreshnessConfig    any      `json:"freshnessConfig"`
+	IsCommunity        bool     `json:"isCommunity"`
+	IsGlobal           bool     `json:"isGlobal"`
+	ModelConfig        any      `json:"modelConfig"`
+	Name               string   `json:"name"`
+	RecursionConfig    any      `json:"recursionConfig"`
+	SearchConfig       any      `json:"searchConfig"`
+	Status             string   `json:"status"`
+	Tags               []string `json:"tags"`
+	ToolConfig         any      `json:"toolConfig"`
+	Topic              string   `json:"topic"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		AudioEnabled respjson.Field
-		Frequency    respjson.Field
-		Name         respjson.Field
-		Status       respjson.Field
-		Topic        respjson.Field
-		ExtraFields  map[string]respjson.Field
-		raw          string
+		AudioEnabled       respjson.Field
+		BlufStructure      respjson.Field
+		BrandingTemplateID respjson.Field
+		BudgetConfig       respjson.Field
+		CronConfig         respjson.Field
+		CustomPrompt       respjson.Field
+		Frequency          respjson.Field
+		FreshnessConfig    respjson.Field
+		IsCommunity        respjson.Field
+		IsGlobal           respjson.Field
+		ModelConfig        respjson.Field
+		Name               respjson.Field
+		RecursionConfig    respjson.Field
+		SearchConfig       respjson.Field
+		Status             respjson.Field
+		Tags               respjson.Field
+		ToolConfig         respjson.Field
+		Topic              respjson.Field
+		ExtraFields        map[string]respjson.Field
+		raw                string
 	} `json:"-"`
 }
 
@@ -399,6 +425,8 @@ type ProfileNewParams struct {
 	Topic string `json:"topic" api:"required"`
 	// Custom BLUF report structure template
 	BlufStructure param.Opt[string] `json:"blufStructure,omitzero"`
+	// Branding template ID (Pro feature)
+	BrandingTemplateID param.Opt[string] `json:"brandingTemplateId,omitzero"`
 	// Custom system prompt for the AI analyst
 	CustomPrompt param.Opt[string] `json:"customPrompt,omitzero"`
 	// Whether this is a community (public) profile
@@ -406,10 +434,22 @@ type ProfileNewParams struct {
 	// Day of month for monthly profiles
 	ScheduleDayOfMonth param.Opt[string] `json:"scheduleDayOfMonth,omitzero"`
 	// Day of week for weekly/biweekly profiles
-	ScheduleDayOfWeek param.Opt[string]               `json:"scheduleDayOfWeek,omitzero"`
-	RecursionConfig   ProfileNewParamsRecursionConfig `json:"recursionConfig,omitzero"`
+	ScheduleDayOfWeek param.Opt[string] `json:"scheduleDayOfWeek,omitzero"`
+	// Audio generation configuration
+	AudioConfig ProfileNewParamsAudioConfig `json:"audioConfig,omitzero"`
+	// Cost budget configuration
+	BudgetConfig ProfileNewParamsBudgetConfig `json:"budgetConfig,omitzero"`
+	// Source freshness configuration
+	FreshnessConfig ProfileNewParamsFreshnessConfig `json:"freshnessConfig,omitzero"`
+	// AI model configuration
+	ModelConfig     ProfileNewParamsModelConfig     `json:"modelConfig,omitzero"`
+	RecursionConfig ProfileNewParamsRecursionConfig `json:"recursionConfig,omitzero"`
+	// Web search configuration
+	SearchConfig ProfileNewParamsSearchConfig `json:"searchConfig,omitzero"`
 	// Tags for categorization
 	Tags []string `json:"tags,omitzero"`
+	// Tool configuration for report generation
+	ToolConfig any `json:"toolConfig,omitzero"`
 	paramObj
 }
 
@@ -431,6 +471,71 @@ const (
 	ProfileNewParamsFrequencyMonthly  ProfileNewParamsFrequency = "monthly"
 )
 
+// Audio generation configuration
+type ProfileNewParamsAudioConfig struct {
+	Enabled param.Opt[bool]    `json:"enabled,omitzero"`
+	Speed   param.Opt[float64] `json:"speed,omitzero"`
+	VoiceID param.Opt[string]  `json:"voiceId,omitzero"`
+	paramObj
+}
+
+func (r ProfileNewParamsAudioConfig) MarshalJSON() (data []byte, err error) {
+	type shadow ProfileNewParamsAudioConfig
+	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *ProfileNewParamsAudioConfig) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// Cost budget configuration
+type ProfileNewParamsBudgetConfig struct {
+	AlertThreshold   param.Opt[float64] `json:"alertThreshold,omitzero"`
+	MaxCostPerReport param.Opt[float64] `json:"maxCostPerReport,omitzero"`
+	paramObj
+}
+
+func (r ProfileNewParamsBudgetConfig) MarshalJSON() (data []byte, err error) {
+	type shadow ProfileNewParamsBudgetConfig
+	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *ProfileNewParamsBudgetConfig) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// Source freshness configuration
+type ProfileNewParamsFreshnessConfig struct {
+	Enabled             param.Opt[bool]    `json:"enabled,omitzero"`
+	MaxAgeMs            param.Opt[int64]   `json:"maxAgeMs,omitzero"`
+	PreferRecentSources param.Opt[bool]    `json:"preferRecentSources,omitzero"`
+	RecencyWeight       param.Opt[float64] `json:"recencyWeight,omitzero"`
+	ValidateLinks       param.Opt[bool]    `json:"validateLinks,omitzero"`
+	paramObj
+}
+
+func (r ProfileNewParamsFreshnessConfig) MarshalJSON() (data []byte, err error) {
+	type shadow ProfileNewParamsFreshnessConfig
+	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *ProfileNewParamsFreshnessConfig) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// AI model configuration
+type ProfileNewParamsModelConfig struct {
+	MaxOutputTokens param.Opt[int64]   `json:"maxOutputTokens,omitzero"`
+	ModelID         param.Opt[string]  `json:"modelId,omitzero"`
+	Temperature     param.Opt[float64] `json:"temperature,omitzero"`
+	paramObj
+}
+
+func (r ProfileNewParamsModelConfig) MarshalJSON() (data []byte, err error) {
+	type shadow ProfileNewParamsModelConfig
+	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *ProfileNewParamsModelConfig) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 // The properties Enabled, MaxDepth, Strategy are required.
 type ProfileNewParamsRecursionConfig struct {
 	Enabled  bool  `json:"enabled" api:"required"`
@@ -451,6 +556,32 @@ func (r *ProfileNewParamsRecursionConfig) UnmarshalJSON(data []byte) error {
 func init() {
 	apijson.RegisterFieldValidator[ProfileNewParamsRecursionConfig](
 		"strategy", "breadth-first", "depth-first", "hybrid",
+	)
+}
+
+// Web search configuration
+type ProfileNewParamsSearchConfig struct {
+	MaxResults     param.Opt[int64]  `json:"maxResults,omitzero"`
+	TimeRange      param.Opt[string] `json:"timeRange,omitzero"`
+	Topic          param.Opt[string] `json:"topic,omitzero"`
+	ExcludeDomains []string          `json:"excludeDomains,omitzero"`
+	IncludeDomains []string          `json:"includeDomains,omitzero"`
+	// Any of "basic", "advanced".
+	SearchDepth string `json:"searchDepth,omitzero"`
+	paramObj
+}
+
+func (r ProfileNewParamsSearchConfig) MarshalJSON() (data []byte, err error) {
+	type shadow ProfileNewParamsSearchConfig
+	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *ProfileNewParamsSearchConfig) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+func init() {
+	apijson.RegisterFieldValidator[ProfileNewParamsSearchConfig](
+		"searchDepth", "basic", "advanced",
 	)
 }
 
