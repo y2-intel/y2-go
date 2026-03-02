@@ -121,7 +121,7 @@ const (
 )
 
 type ReportGetResponse struct {
-	Data ReportGetResponseData `json:"data,required"`
+	Data ReportGetResponseData `json:"data" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -137,12 +137,12 @@ func (r *ReportGetResponse) UnmarshalJSON(data []byte) error {
 }
 
 type ReportGetResponseData struct {
-	ID             string                        `json:"id,required"`
-	Content        ReportGetResponseDataContent  `json:"content,required"`
-	GeneratedAt    int64                         `json:"generatedAt,required"`
-	GeneratedAtISO time.Time                     `json:"generatedAtISO,required" format:"date-time"`
-	ProfileID      string                        `json:"profileId,required"`
-	Audio          AudioMetadata                 `json:"audio,nullable"`
+	ID             string                        `json:"id" api:"required"`
+	Content        ReportGetResponseDataContent  `json:"content" api:"required"`
+	GeneratedAt    int64                         `json:"generatedAt" api:"required"`
+	GeneratedAtISO time.Time                     `json:"generatedAtISO" api:"required" format:"date-time"`
+	ProfileID      string                        `json:"profileId" api:"required"`
+	Audio          AudioMetadata                 `json:"audio" api:"nullable"`
 	Metadata       ReportGetResponseDataMetadata `json:"metadata"`
 	ProfileName    string                        `json:"profileName"`
 	ProfileTopic   string                        `json:"profileTopic"`
@@ -280,8 +280,8 @@ func (r *ReportGetResponseDataMetadataRecursionMetadata) UnmarshalJSON(data []by
 }
 
 type ReportListResponse struct {
-	Data []ReportListResponseData `json:"data,required"`
-	Meta ReportListResponseMeta   `json:"meta,required"`
+	Data []ReportListResponseData `json:"data" api:"required"`
+	Meta ReportListResponseMeta   `json:"meta" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -299,13 +299,13 @@ func (r *ReportListResponse) UnmarshalJSON(data []byte) error {
 
 type ReportListResponseData struct {
 	// Report ID (Convex document ID)
-	ID string `json:"id,required"`
+	ID string `json:"id" api:"required"`
 	// Unix timestamp (milliseconds)
-	GeneratedAt int64 `json:"generatedAt,required"`
+	GeneratedAt int64 `json:"generatedAt" api:"required"`
 	// ISO 8601 timestamp
-	GeneratedAtISO time.Time `json:"generatedAtISO,required" format:"date-time"`
+	GeneratedAtISO time.Time `json:"generatedAtISO" api:"required" format:"date-time"`
 	// Profile ID this report belongs to
-	ProfileID string `json:"profileId,required"`
+	ProfileID string `json:"profileId" api:"required"`
 	// Whether audio narration is available
 	HasAudio bool `json:"hasAudio"`
 	// LLM model used for generation
@@ -354,7 +354,7 @@ func (r *ReportListResponseMeta) UnmarshalJSON(data []byte) error {
 }
 
 type ReportGetAudioResponse struct {
-	Data AudioMetadata `json:"data,required"`
+	Data AudioMetadata `json:"data" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field

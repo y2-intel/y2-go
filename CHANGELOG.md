@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.4.1 (2026-02-25)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/y2-intel/y2-go/compare/v0.4.0...v0.4.1)
+
+### Bug Fixes
+
+* allow canceling a request while it is waiting to retry ([acfea7f](https://github.com/y2-intel/y2-go/commit/acfea7fe2b684991018554459dc631b72aedd3f2))
+* **encoder:** correctly serialize NullStruct ([4fccf82](https://github.com/y2-intel/y2-go/commit/4fccf8243eaaba81920f67f1c19be9769e2515a5))
+
+
+### Chores
+
+* **internal:** move custom custom `json` tags to `api` ([841a070](https://github.com/y2-intel/y2-go/commit/841a070f734d6e19d0b5419fb64477228489d57c))
+* **internal:** remove mock server code ([a12e1b6](https://github.com/y2-intel/y2-go/commit/a12e1b67299bd61882d3fa3097b48d0d10a42bcd))
+* update mock server docs ([5e195ab](https://github.com/y2-intel/y2-go/commit/5e195ab603c42c5f8b56f80f031b3aa60c322d36))
+
 ## 0.4.0 (2026-02-10)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/y2-intel/y2-go/compare/v0.3.0...v0.4.0)
