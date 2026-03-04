@@ -16,10 +16,13 @@ import (
 // interacting with the y2 API. You should not instantiate this client directly,
 // and instead use the [NewClient] method instead.
 type Client struct {
-	Options  []option.RequestOption
-	Reports  ReportService
+	Options []option.RequestOption
+	// Intelligence report operations
+	Reports ReportService
+	// Subscription profile operations
 	Profiles ProfileService
-	News     NewsService
+	// GloriaAI news terminal operations
+	News NewsService
 }
 
 // DefaultClientOptions read from the environment (Y2_API_KEY, Y2_BASE_URL). This
