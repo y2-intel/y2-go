@@ -372,7 +372,7 @@ func (r *ReportGetAudioResponse) UnmarshalJSON(data []byte) error {
 }
 
 type ReportListParams struct {
-	// Maximum number of reports to return
+	// Maximum number of reports to return (hard-capped at 5)
 	Limit param.Opt[int64] `query:"limit,omitzero" json:"-"`
 	// Filter reports by profile ID
 	ProfileID param.Opt[string] `query:"profileId,omitzero" json:"-"`
