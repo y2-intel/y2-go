@@ -31,9 +31,31 @@ func TestProfileNewWithOptionalParams(t *testing.T) {
 		Name:              "Cybersecurity Weekly",
 		ScheduleTimeOfDay: "09:00",
 		Topic:             "Cybersecurity threats, vulnerabilities, and defense strategies",
-		BlufStructure:     y2.String("blufStructure"),
-		CustomPrompt:      y2.String("customPrompt"),
-		IsCommunity:       y2.Bool(true),
+		AudioConfig: y2.ProfileNewParamsAudioConfig{
+			Enabled: y2.Bool(true),
+			Speed:   y2.Float(0),
+			VoiceID: y2.String("voiceId"),
+		},
+		BlufStructure:      y2.String("blufStructure"),
+		BrandingTemplateID: y2.String("brandingTemplateId"),
+		BudgetConfig: y2.ProfileNewParamsBudgetConfig{
+			AlertThreshold:   y2.Float(0),
+			MaxCostPerReport: y2.Float(0),
+		},
+		CustomPrompt: y2.String("customPrompt"),
+		FreshnessConfig: y2.ProfileNewParamsFreshnessConfig{
+			Enabled:             y2.Bool(true),
+			MaxAgeMs:            y2.Int(0),
+			PreferRecentSources: y2.Bool(true),
+			RecencyWeight:       y2.Float(0),
+			ValidateLinks:       y2.Bool(true),
+		},
+		IsCommunity: y2.Bool(true),
+		ModelConfig: y2.ProfileNewParamsModelConfig{
+			MaxOutputTokens: y2.Int(0),
+			ModelID:         y2.String("modelId"),
+			Temperature:     y2.Float(0),
+		},
 		RecursionConfig: y2.ProfileNewParamsRecursionConfig{
 			Enabled:  true,
 			MaxDepth: 1,
@@ -41,7 +63,16 @@ func TestProfileNewWithOptionalParams(t *testing.T) {
 		},
 		ScheduleDayOfMonth: y2.String("1"),
 		ScheduleDayOfWeek:  y2.String("monday"),
-		Tags:               []string{"string"},
+		SearchConfig: y2.ProfileNewParamsSearchConfig{
+			ExcludeDomains: []string{"string"},
+			IncludeDomains: []string{"string"},
+			MaxResults:     y2.Int(0),
+			SearchDepth:    "basic",
+			TimeRange:      y2.String("timeRange"),
+			Topic:          y2.String("topic"),
+		},
+		Tags:       []string{"string"},
+		ToolConfig: map[string]any{},
 	})
 	if err != nil {
 		var apierr *y2.Error

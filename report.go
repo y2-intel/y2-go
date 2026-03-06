@@ -19,6 +19,8 @@ import (
 	"github.com/y2-intel/y2-go/packages/respjson"
 )
 
+// Intelligence report operations
+//
 // ReportService contains methods and other services that help with interacting
 // with the y2 API.
 //

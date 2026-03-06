@@ -17,6 +17,8 @@ import (
 	"github.com/y2-intel/y2-go/packages/respjson"
 )
 
+// GloriaAI news terminal operations
+//
 // NewsService contains methods and other services that help with interacting with
 // the y2 API.
 //
