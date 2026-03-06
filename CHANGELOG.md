@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0 (2026-03-06)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/y2-intel/y2-go/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** api update ([2417241](https://github.com/y2-intel/y2-go/commit/2417241a6b619216e95c7bb5c4bcea417a593912))
+
 ## 0.5.0 (2026-03-04)
 
 Full Changelog: [v0.4.1...v0.5.0](https://github.com/y2-intel/y2-go/compare/v0.4.1...v0.5.0)
