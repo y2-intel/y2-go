@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.7.0 (2026-03-07)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/y2-intel/y2-go/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** manual updates ([bf61517](https://github.com/y2-intel/y2-go/commit/bf61517270f3ef78918d595362a985c255348857))
+
+
+### Chores
+
+* **internal:** codegen related update ([cb6715b](https://github.com/y2-intel/y2-go/commit/cb6715b249f4e9cd2365bada11d59548857c3b80))
+
 ## 0.6.0 (2026-03-06)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/y2-intel/y2-go/compare/v0.5.0...v0.6.0)
