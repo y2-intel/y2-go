@@ -23,6 +23,12 @@ type Client struct {
 	Profiles ProfileService
 	// GloriaAI news terminal operations
 	News NewsService
+	// Webhook configuration management (Pro feature)
+	Webhooks WebhookService
+	// Subscription delivery management
+	Subscriptions SubscriptionService
+	// Situation Room OSINT intelligence operations
+	Osint OsintService
 }
 
 // DefaultClientOptions read from the environment (Y2_API_KEY, Y2_BASE_URL). This
@@ -50,6 +56,9 @@ func NewClient(opts ...option.RequestOption) (r Client) {
 	r.Reports = NewReportService(opts...)
 	r.Profiles = NewProfileService(opts...)
 	r.News = NewNewsService(opts...)
+	r.Webhooks = NewWebhookService(opts...)
+	r.Subscriptions = NewSubscriptionService(opts...)
+	r.Osint = NewOsintService(opts...)
 
 	return
 }
