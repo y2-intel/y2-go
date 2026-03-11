@@ -43,11 +43,11 @@ func (r *SubscriptionService) UpdateDelivery(ctx context.Context, subscriptionID
 	opts = slices.Concat(r.Options, opts)
 	if subscriptionID == "" {
 		err = errors.New("missing required subscriptionId parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("subscriptions/%s/delivery", subscriptionID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPatch, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 type SubscriptionUpdateDeliveryResponse struct {

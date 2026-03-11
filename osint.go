@@ -51,7 +51,7 @@ func (r *OsintService) GetConflictIndicators(ctx context.Context, query OsintGet
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/cii"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns GPS interference zones detected via ADS-B navigation accuracy
@@ -60,7 +60,7 @@ func (r *OsintService) GetGpsJammingZones(ctx context.Context, query OsintGetGps
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/gps-jamming"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns military posture assessments for monitored theaters, based on detected
@@ -70,7 +70,7 @@ func (r *OsintService) GetMilitaryPosture(ctx context.Context, query OsintGetMil
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/military-posture"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns tracked military aircraft positions from the OpenSky Network, filtered
@@ -79,7 +79,7 @@ func (r *OsintService) ListAircraft(ctx context.Context, query OsintListAircraft
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/aircraft"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns OSINT threat events from the Situation Room. Supports filtering by
@@ -88,7 +88,7 @@ func (r *OsintService) ListEvents(ctx context.Context, query OsintListEventsPara
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/events"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns naval vessel positions sourced from USNI fleet tracker data, including
@@ -97,7 +97,7 @@ func (r *OsintService) ListVessels(ctx context.Context, query OsintListVesselsPa
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/vessels"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns OSINT events with geographic coordinates for map display. Events without
@@ -106,7 +106,7 @@ func (r *OsintService) MapEvents(ctx context.Context, query OsintMapEventsParams
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/map"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 type OsintGetConflictIndicatorsResponse struct {

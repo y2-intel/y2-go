@@ -44,7 +44,7 @@ func (r *NewsService) List(ctx context.Context, query NewsListParams, opts ...op
 	opts = slices.Concat(r.Options, opts)
 	path := "news"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns AI-generated recap summaries for specified topics within a given
@@ -53,7 +53,7 @@ func (r *NewsService) GetRecaps(ctx context.Context, query NewsGetRecapsParams, 
 	opts = slices.Concat(r.Options, opts)
 	path := "news/recaps"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns all available news feed topics with descriptions.
@@ -61,7 +61,7 @@ func (r *NewsService) ListFeeds(ctx context.Context, opts ...option.RequestOptio
 	opts = slices.Concat(r.Options, opts)
 	path := "news/feeds"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Time period for recap data
