@@ -41,7 +41,7 @@ func (r *OsintSourceService) GetDataSourceHealth(ctx context.Context, opts ...op
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/sources/status"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 type OsintSourceGetDataSourceHealthResponse struct {

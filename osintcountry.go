@@ -46,11 +46,11 @@ func (r *OsintCountryService) GetCountryInstabilityIndex(ctx context.Context, co
 	opts = slices.Concat(r.Options, opts)
 	if countryCode == "" {
 		err = errors.New("missing required countryCode parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("osint/countries/%s/cii", countryCode)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns recent news items specific to a given country, sourced from the OSINT
@@ -59,11 +59,11 @@ func (r *OsintCountryService) GetCountryNews(ctx context.Context, countryCode st
 	opts = slices.Concat(r.Options, opts)
 	if countryCode == "" {
 		err = errors.New("missing required countryCode parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("osint/countries/%s/news", countryCode)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns an AI-generated intelligence brief for a specific country. Briefs are
@@ -72,11 +72,11 @@ func (r *OsintCountryService) GetIntelligenceBrief(ctx context.Context, countryC
 	opts = slices.Concat(r.Options, opts)
 	if countryCode == "" {
 		err = errors.New("missing required countryCode parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("osint/countries/%s/brief", countryCode)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns prediction market data for a specific country, including probabilities
@@ -85,11 +85,11 @@ func (r *OsintCountryService) GetPredictionMarkets(ctx context.Context, countryC
 	opts = slices.Concat(r.Options, opts)
 	if countryCode == "" {
 		err = errors.New("missing required countryCode parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("osint/countries/%s/predictions", countryCode)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns the primary stock market index data for a specific country, including
@@ -98,11 +98,11 @@ func (r *OsintCountryService) GetStockMarketIndex(ctx context.Context, countryCo
 	opts = slices.Concat(r.Options, opts)
 	if countryCode == "" {
 		err = errors.New("missing required countryCode parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("osint/countries/%s/markets", countryCode)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 type OsintCountryGetCountryInstabilityIndexResponse struct {

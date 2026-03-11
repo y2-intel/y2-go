@@ -43,7 +43,7 @@ func (r *ProfileService) New(ctx context.Context, body ProfileNewParams, opts ..
 	opts = slices.Concat(r.Options, opts)
 	path := "profiles"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 // Replaces all mutable fields of an existing intelligence profile. Only profiles
@@ -52,11 +52,11 @@ func (r *ProfileService) Update(ctx context.Context, profileID string, body Prof
 	opts = slices.Concat(r.Options, opts)
 	if profileID == "" {
 		err = errors.New("missing required profileId parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("profiles/%s", profileID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPut, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns a list of intelligence profiles the user is subscribed to, including
@@ -65,7 +65,7 @@ func (r *ProfileService) List(ctx context.Context, opts ...option.RequestOption)
 	opts = slices.Concat(r.Options, opts)
 	path := "profiles"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Permanently deletes an intelligence profile and all associated subscriptions.
@@ -75,11 +75,11 @@ func (r *ProfileService) Delete(ctx context.Context, profileID string, opts ...o
 	opts = slices.Concat(r.Options, opts)
 	if profileID == "" {
 		err = errors.New("missing required profileId parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("profiles/%s", profileID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodDelete, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Partially updates an existing intelligence profile. Only the fields included in
@@ -89,11 +89,11 @@ func (r *ProfileService) PartialUpdate(ctx context.Context, profileID string, bo
 	opts = slices.Concat(r.Options, opts)
 	if profileID == "" {
 		err = errors.New("missing required profileId parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("profiles/%s", profileID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPatch, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 type ProfileNewResponse struct {
