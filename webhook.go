@@ -43,7 +43,7 @@ func (r *WebhookService) New(ctx context.Context, body WebhookNewParams, opts ..
 	opts = slices.Concat(r.Options, opts)
 	path := "webhooks"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 // Updates an existing webhook configuration. All fields are optional. Only
@@ -52,11 +52,11 @@ func (r *WebhookService) Update(ctx context.Context, webhookID string, body Webh
 	opts = slices.Concat(r.Options, opts)
 	if webhookID == "" {
 		err = errors.New("missing required webhookId parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("webhooks/%s", webhookID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPut, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns all webhook configurations for the authenticated user. Secrets are
@@ -65,7 +65,7 @@ func (r *WebhookService) List(ctx context.Context, opts ...option.RequestOption)
 	opts = slices.Concat(r.Options, opts)
 	path := "webhooks"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Deletes a webhook configuration. Fails with 409 if the webhook is currently in
@@ -74,11 +74,11 @@ func (r *WebhookService) Delete(ctx context.Context, webhookID string, opts ...o
 	opts = slices.Concat(r.Options, opts)
 	if webhookID == "" {
 		err = errors.New("missing required webhookId parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("webhooks/%s", webhookID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodDelete, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Sends a test payload to the webhook URL and returns the result. Returns 422 if
@@ -87,11 +87,11 @@ func (r *WebhookService) Test(ctx context.Context, webhookID string, opts ...opt
 	opts = slices.Concat(r.Options, opts)
 	if webhookID == "" {
 		err = errors.New("missing required webhookId parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("webhooks/%s/test", webhookID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 type WebhookNewResponse struct {

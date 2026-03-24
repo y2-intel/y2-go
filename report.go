@@ -46,11 +46,11 @@ func (r *ReportService) Get(ctx context.Context, reportID string, opts ...option
 	opts = slices.Concat(r.Options, opts)
 	if reportID == "" {
 		err = errors.New("missing required reportId parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("reports/%s", reportID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns a list of reports for the user's subscribed profiles. Results are sorted
@@ -59,7 +59,7 @@ func (r *ReportService) List(ctx context.Context, query ReportListParams, opts .
 	opts = slices.Concat(r.Options, opts)
 	path := "reports"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Returns audio file metadata or redirects to the CDN URL. Requires the
@@ -68,11 +68,11 @@ func (r *ReportService) GetAudio(ctx context.Context, reportID string, query Rep
 	opts = slices.Concat(r.Options, opts)
 	if reportID == "" {
 		err = errors.New("missing required reportId parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("reports/%s/audio", reportID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 type AudioMetadata struct {

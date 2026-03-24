@@ -38,7 +38,7 @@ func TestUserAgentHeader(t *testing.T) {
 			},
 		}),
 	)
-	client.Reports.List(context.Background(), y2.ReportListParams{})
+	_, _ = client.Reports.List(context.Background(), y2.ReportListParams{})
 	if userAgent != fmt.Sprintf("Y2/Go %s", internal.PackageVersion) {
 		t.Errorf("Expected User-Agent to be correct, but got: %#v", userAgent)
 	}
