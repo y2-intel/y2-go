@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.7.1 (2026-03-24)
+
+Full Changelog: [v0.7.0...v0.7.1](https://github.com/y2-intel/y2-go/compare/v0.7.0...v0.7.1)
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([d1d4a22](https://github.com/y2-intel/y2-go/commit/d1d4a22eb90423a77ab21a196095673dc4dba1dc))
+* **internal:** minor cleanup ([3c95082](https://github.com/y2-intel/y2-go/commit/3c9508290479a1a99c1ad5450a03aed8ba8e12eb))
+* **internal:** tweak CI branches ([ad9cb29](https://github.com/y2-intel/y2-go/commit/ad9cb2903ec851b67d2fd65adc3057ab4f47353d))
+* **internal:** update gitignore ([784fe11](https://github.com/y2-intel/y2-go/commit/784fe113bbc341d022674b37d297cb7a419b8298))
+* **internal:** use explicit returns ([434d72f](https://github.com/y2-intel/y2-go/commit/434d72fe5324935ee7ee2c5ea672a621a60b1a4f))
+* **internal:** use explicit returns in more places ([191a625](https://github.com/y2-intel/y2-go/commit/191a62536a7d427351049b6e1e8e90f0020a8e14))
+
 ## 0.7.0 (2026-03-07)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/y2-intel/y2-go/compare/v0.6.0...v0.7.0)
