@@ -42,6 +42,11 @@ func NewOsintCountryService(opts ...option.RequestOption) (r OsintCountryService
 
 // Returns the per-country Conflict Indicators Index (CII) score, including
 // baseline, delta, and component breakdown.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *OsintCountryService) GetCountryInstabilityIndex(ctx context.Context, countryCode string, opts ...option.RequestOption) (res *OsintCountryGetCountryInstabilityIndexResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	if countryCode == "" {
@@ -55,6 +60,11 @@ func (r *OsintCountryService) GetCountryInstabilityIndex(ctx context.Context, co
 
 // Returns recent news items specific to a given country, sourced from the OSINT
 // event pipeline.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *OsintCountryService) GetCountryNews(ctx context.Context, countryCode string, query OsintCountryGetCountryNewsParams, opts ...option.RequestOption) (res *OsintCountryGetCountryNewsResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	if countryCode == "" {
@@ -68,6 +78,11 @@ func (r *OsintCountryService) GetCountryNews(ctx context.Context, countryCode st
 
 // Returns an AI-generated intelligence brief for a specific country. Briefs are
 // generated periodically and cached.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *OsintCountryService) GetIntelligenceBrief(ctx context.Context, countryCode string, opts ...option.RequestOption) (res *OsintCountryGetIntelligenceBriefResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	if countryCode == "" {
@@ -81,6 +96,11 @@ func (r *OsintCountryService) GetIntelligenceBrief(ctx context.Context, countryC
 
 // Returns prediction market data for a specific country, including probabilities
 // and trading volumes.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *OsintCountryService) GetPredictionMarkets(ctx context.Context, countryCode string, query OsintCountryGetPredictionMarketsParams, opts ...option.RequestOption) (res *OsintCountryGetPredictionMarketsResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	if countryCode == "" {
@@ -94,6 +114,11 @@ func (r *OsintCountryService) GetPredictionMarkets(ctx context.Context, countryC
 
 // Returns the primary stock market index data for a specific country, including
 // weekly change and currency.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *OsintCountryService) GetStockMarketIndex(ctx context.Context, countryCode string, opts ...option.RequestOption) (res *OsintCountryGetStockMarketIndexResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	if countryCode == "" {
@@ -327,6 +352,9 @@ func (r *OsintCountryGetIntelligenceBriefResponseData) UnmarshalJSON(data []byte
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Response wrapper for `/osint/countries/{countryCode}/predictions`. See
+// `PredictionMarketListResponse` for the unified Polymarket+Kalshi response
+// wrapper used by `/osint/prediction-markets`.
 type OsintCountryGetPredictionMarketsResponse struct {
 	Data []OsintCountryGetPredictionMarketsResponseData `json:"data" api:"required"`
 	Meta OsintCountryGetPredictionMarketsResponseMeta   `json:"meta" api:"required"`
@@ -345,6 +373,10 @@ func (r *OsintCountryGetPredictionMarketsResponse) UnmarshalJSON(data []byte) er
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Polymarket-only prediction market shape returned by
+// `/osint/countries/{countryCode}/predictions`. The unified Polymarket+Kalshi
+// shape returned by `/osint/prediction-markets` is documented separately as
+// `PredictionMarket`.
 type OsintCountryGetPredictionMarketsResponseData struct {
 	// Prediction market identifier
 	MarketID string `json:"marketId" api:"required"`

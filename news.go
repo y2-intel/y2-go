@@ -40,6 +40,11 @@ func NewNewsService(opts ...option.RequestOption) (r NewsService) {
 
 // Returns news items from the GloriaAI terminal cache. Supports filtering by
 // topics and pagination.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *NewsService) List(ctx context.Context, query NewsListParams, opts ...option.RequestOption) (res *NewsListResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "news"
@@ -49,6 +54,11 @@ func (r *NewsService) List(ctx context.Context, query NewsListParams, opts ...op
 
 // Returns AI-generated recap summaries for specified topics within a given
 // timeframe.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *NewsService) GetRecaps(ctx context.Context, query NewsGetRecapsParams, opts ...option.RequestOption) (res *NewsGetRecapsResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "news/recaps"
@@ -57,6 +67,11 @@ func (r *NewsService) GetRecaps(ctx context.Context, query NewsGetRecapsParams, 
 }
 
 // Returns all available news feed topics with descriptions.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *NewsService) ListFeeds(ctx context.Context, opts ...option.RequestOption) (res *NewsListFeedsResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "news/feeds"
@@ -80,7 +95,6 @@ type TopicEnum string
 const (
 	TopicEnumAI              TopicEnum = "ai"
 	TopicEnumAIAgents        TopicEnum = "ai_agents"
-	TopicEnumAptos           TopicEnum = "aptos"
 	TopicEnumBase            TopicEnum = "base"
 	TopicEnumBitcoin         TopicEnum = "bitcoin"
 	TopicEnumCrypto          TopicEnum = "crypto"
@@ -90,12 +104,13 @@ const (
 	TopicEnumHyperliquid     TopicEnum = "hyperliquid"
 	TopicEnumMachineLearning TopicEnum = "machine_learning"
 	TopicEnumMacro           TopicEnum = "macro"
-	TopicEnumOndo            TopicEnum = "ondo"
+	TopicEnumOnChainWhale    TopicEnum = "on_chain_whale"
 	TopicEnumPerps           TopicEnum = "perps"
 	TopicEnumRipple          TopicEnum = "ripple"
 	TopicEnumRwa             TopicEnum = "rwa"
 	TopicEnumSolana          TopicEnum = "solana"
 	TopicEnumTech            TopicEnum = "tech"
+	TopicEnumTokenListings   TopicEnum = "token_listings"
 	TopicEnumVirtuals        TopicEnum = "virtuals"
 )
 
@@ -247,9 +262,9 @@ func (r *NewsListFeedsResponse) UnmarshalJSON(data []byte) error {
 type NewsListFeedsResponseData struct {
 	// Available news feed topics from GloriaAI
 	//
-	// Any of "ai", "ai_agents", "aptos", "base", "bitcoin", "crypto", "dats", "defi",
-	// "ethereum", "hyperliquid", "machine_learning", "macro", "ondo", "perps",
-	// "ripple", "rwa", "solana", "tech", "virtuals".
+	// Any of "ai", "ai_agents", "base", "bitcoin", "crypto", "dats", "defi",
+	// "ethereum", "hyperliquid", "machine_learning", "macro", "on_chain_whale",
+	// "perps", "ripple", "rwa", "solana", "tech", "token_listings", "virtuals".
 	ID TopicEnum `json:"id" api:"required"`
 	// Human-readable name
 	Name string `json:"name" api:"required"`
@@ -290,10 +305,10 @@ func (r *NewsListFeedsResponseMeta) UnmarshalJSON(data []byte) error {
 type NewsListParams struct {
 	// Maximum number of items to return
 	Limit param.Opt[int64] `query:"limit,omitzero" json:"-"`
-	// Comma-separated list of topics to filter by. Valid topics: ai, ai_agents, aptos,
-	// base, bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning,
-	// macro, ondo, perps, ripple, rwa, solana, tech, virtuals. Default: crypto,
-	// ai_agents, macro, bitcoin, ethereum, tech
+	// Comma-separated list of topics to filter by. Valid topics: ai, ai_agents, base,
+	// bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
+	// on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals.
+	// Default: crypto, ai_agents, macro, bitcoin, ethereum, tech
 	Topics param.Opt[string] `query:"topics,omitzero" json:"-"`
 	paramObj
 }
@@ -307,9 +322,9 @@ func (r NewsListParams) URLQuery() (v url.Values, err error) {
 }
 
 type NewsGetRecapsParams struct {
-	// Comma-separated list of topics. Valid topics: ai, ai_agents, aptos, base,
-	// bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-	// ondo, perps, ripple, rwa, solana, tech, virtuals
+	// Comma-separated list of topics. Valid topics: ai, ai_agents, base, bitcoin,
+	// crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
+	// on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals
 	Topics param.Opt[string] `query:"topics,omitzero" json:"-"`
 	// Time period for recaps
 	//
