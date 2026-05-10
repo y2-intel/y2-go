@@ -47,6 +47,11 @@ func NewOsintService(opts ...option.RequestOption) (r OsintService) {
 // Returns the Conflict Indicators Index (CII) values. Each item represents a
 // conflict indicator with a score from 0-100 and a delta showing recent change.
 // Supports filtering by region and category.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *OsintService) GetConflictIndicators(ctx context.Context, query OsintGetConflictIndicatorsParams, opts ...option.RequestOption) (res *OsintGetConflictIndicatorsResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/cii"
@@ -56,6 +61,24 @@ func (r *OsintService) GetConflictIndicators(ctx context.Context, query OsintGet
 
 // Returns GPS interference zones detected via ADS-B navigation accuracy
 // degradation analysis, aggregated into H3 hex cells.
+//
+// Coverage spans 22 theaters with tiered refresh cadence calibrated to fit the
+// shared Wingbits quota:
+//
+// | Tier      | Cadence   | Theaters                                                                                        |
+// | --------- | --------- | ----------------------------------------------------------------------------------------------- |
+// | Hot       | Hourly    | iran, blacksea, israelgaza, redsea, taiwan, scs                                                 |
+// | Watch     | Every 3h  | emed, korea, caucasus, kaliningrad-tight, finland-russia, us-south, bashi-luzon, east-china-sea |
+// | Perimeter | Every 6h  | us-pacom-west, us-northeast, aleutian-bering, baltic-south, giuk-greenland                      |
+// | Daily     | Every 24h | baltic-north, us-north, arctic-greenland-pass                                                   |
+//
+// Records expire 30 minutes after fetch; clients polling for fresh interference
+// zones should align polling cadence to the tier of interest.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *OsintService) GetGpsJammingZones(ctx context.Context, query OsintGetGpsJammingZonesParams, opts ...option.RequestOption) (res *OsintGetGpsJammingZonesResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/gps-jamming"
@@ -64,8 +87,19 @@ func (r *OsintService) GetGpsJammingZones(ctx context.Context, query OsintGetGps
 }
 
 // Returns military posture assessments for monitored theaters, based on detected
-// military aircraft activity from the OpenSky Network. Each theater has a posture
-// level (normal, elevated, critical) and aircraft breakdown by type.
+// military aircraft activity from the Wingbits ADS-B network. Each theater has a
+// posture level (normal, elevated, critical) and aircraft breakdown by type.
+//
+// > **Status (May 2026):** Posture is computed from the aircraft tracking
+// > pipeline, which is temporarily feature-flagged off to conserve the shared
+// > Wingbits quota. This endpoint remains available but may return empty or stale
+// > results until aircraft ingestion is re-enabled. GPS jamming
+// > (`/osint/gps-jamming`) is unaffected.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *OsintService) GetMilitaryPosture(ctx context.Context, query OsintGetMilitaryPostureParams, opts ...option.RequestOption) (res *OsintGetMilitaryPostureResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/military-posture"
@@ -73,8 +107,18 @@ func (r *OsintService) GetMilitaryPosture(ctx context.Context, query OsintGetMil
 	return res, err
 }
 
-// Returns tracked military aircraft positions from the OpenSky Network, filtered
-// and classified by type (tanker, AWACS, fighter, etc.).
+// Returns tracked military aircraft positions from the Wingbits ADS-B network,
+// filtered and classified by type (tanker, AWACS, fighter, etc.).
+//
+// > **Status (May 2026):** Aircraft ingestion is temporarily feature-flagged off
+// > to dedicate the shared Wingbits quota to GPS interference detection. This
+// > endpoint remains available but may return empty or stale results until
+// > ingestion is re-enabled. GPS jamming (`/osint/gps-jamming`) is unaffected.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *OsintService) ListAircraft(ctx context.Context, query OsintListAircraftParams, opts ...option.RequestOption) (res *OsintListAircraftResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/aircraft"
@@ -84,6 +128,11 @@ func (r *OsintService) ListAircraft(ctx context.Context, query OsintListAircraft
 
 // Returns OSINT threat events from the Situation Room. Supports filtering by
 // category, severity, region, and country.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *OsintService) ListEvents(ctx context.Context, query OsintListEventsParams, opts ...option.RequestOption) (res *OsintListEventsResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/events"
@@ -93,6 +142,11 @@ func (r *OsintService) ListEvents(ctx context.Context, query OsintListEventsPara
 
 // Returns naval vessel positions sourced from USNI fleet tracker data, including
 // carrier strike groups and individual warships.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *OsintService) ListVessels(ctx context.Context, query OsintListVesselsParams, opts ...option.RequestOption) (res *OsintListVesselsResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/vessels"
@@ -102,6 +156,11 @@ func (r *OsintService) ListVessels(ctx context.Context, query OsintListVesselsPa
 
 // Returns OSINT events with geographic coordinates for map display. Events without
 // coordinates are excluded.
+//
+// This endpoint also supports x402 pay-per-request access. Requests with a valid
+// Bearer token use the normal API-key flow. Requests without Authorization return
+// `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+// `PAYMENT-SIGNATURE`.
 func (r *OsintService) MapEvents(ctx context.Context, query OsintMapEventsParams, opts ...option.RequestOption) (res *OsintMapEventsResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "osint/map"
@@ -350,7 +409,7 @@ type OsintGetMilitaryPostureResponseData struct {
 	//
 	// Any of "normal", "elevated", "critical".
 	Posture string `json:"posture" api:"required"`
-	// Theater name (e.g. "iran", "taiwan", "baltic")
+	// Theater name (e.g. "iran", "taiwan", "blacksea", "scs")
 	Theater string `json:"theater" api:"required"`
 	// Aircraft count by type
 	Breakdown OsintGetMilitaryPostureResponseDataBreakdown `json:"breakdown"`
@@ -609,6 +668,10 @@ type OsintListEventsResponseData struct {
 	FetchedAtISO time.Time `json:"fetchedAtISO" api:"nullable" format:"date-time"`
 	// Human-readable location name
 	LocationName string `json:"locationName"`
+	// Extraction provenance metadata. Populated only when
+	// `sourceType === "y2_report"`; null for all other sources. Returned by
+	// `/osint/regional`.
+	Provenance OsintListEventsResponseDataProvenance `json:"provenance"`
 	// Geographic region identifier
 	//
 	// Any of "mena", "africa", "latam", "asiapac", "europe", "namerica".
@@ -631,6 +694,7 @@ type OsintListEventsResponseData struct {
 		FetchedAt    respjson.Field
 		FetchedAtISO respjson.Field
 		LocationName respjson.Field
+		Provenance   respjson.Field
 		Region       respjson.Field
 		URL          respjson.Field
 		ExtraFields  map[string]respjson.Field
@@ -662,6 +726,61 @@ type OsintListEventsResponseDataCoordinates struct {
 // Returns the unmodified JSON received from the API
 func (r OsintListEventsResponseDataCoordinates) RawJSON() string { return r.JSON.raw }
 func (r *OsintListEventsResponseDataCoordinates) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// Extraction provenance metadata. Populated only when
+// `sourceType === "y2_report"`; null for all other sources. Returned by
+// `/osint/regional`.
+type OsintListEventsResponseDataProvenance struct {
+	// Source identifier (always "y2_report")
+	//
+	// Any of "y2_report".
+	Source string `json:"source" api:"required"`
+	// Event temporal classification from GroundSource methodology
+	//
+	// Any of "ongoing", "past", "forecast", "analysis".
+	Classification string `json:"classification"`
+	// Extraction confidence score (0.5-1.0)
+	Confidence float64 `json:"confidence"`
+	// Named entities extracted from the report
+	Entities []OsintListEventsResponseDataProvenanceEntity `json:"entities"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Source         respjson.Field
+		Classification respjson.Field
+		Confidence     respjson.Field
+		Entities       respjson.Field
+		ExtraFields    map[string]respjson.Field
+		raw            string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r OsintListEventsResponseDataProvenance) RawJSON() string { return r.JSON.raw }
+func (r *OsintListEventsResponseDataProvenance) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type OsintListEventsResponseDataProvenanceEntity struct {
+	// Entity name
+	Name string `json:"name" api:"required"`
+	// Entity type
+	//
+	// Any of "person", "organization", "country", "location".
+	Type string `json:"type" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Name        respjson.Field
+		Type        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r OsintListEventsResponseDataProvenanceEntity) RawJSON() string { return r.JSON.raw }
+func (r *OsintListEventsResponseDataProvenanceEntity) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -1073,7 +1192,7 @@ func (r OsintGetMilitaryPostureParams) URLQuery() (v url.Values, err error) {
 type OsintListAircraftParams struct {
 	// Maximum number of aircraft to return
 	Limit param.Opt[int64] `query:"limit,omitzero" json:"-"`
-	// Filter by theater ID (e.g. "iran", "taiwan", "baltic")
+	// Filter by theater ID (e.g. "iran", "taiwan", "blacksea", "scs")
 	Theater param.Opt[string] `query:"theater,omitzero" json:"-"`
 	paramObj
 }
