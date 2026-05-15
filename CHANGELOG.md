@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.8.0 (2026-05-15)
+
+Full Changelog: [v0.7.1...v0.8.0](https://github.com/y2-intel/y2-go/compare/v0.7.1...v0.8.0)
+
+### Features
+
+* **api:** api update ([b61a20f](https://github.com/y2-intel/y2-go/commit/b61a20f0098ed182705b0e6984aa312378a4168d))
+* **client:** optimize json encoder for internal types ([43225ba](https://github.com/y2-intel/y2-go/commit/43225ba0d2ae26fa2d068e39b2ec04cca1dfdf6d))
+* **go:** add default http client with timeout ([62b74a3](https://github.com/y2-intel/y2-go/commit/62b74a3739f89e9552d08c00d218a42903f28c2c))
+* **internal:** support comma format in multipart form encoding ([eeb52df](https://github.com/y2-intel/y2-go/commit/eeb52dff148b2c9966abeafa3bcce17bf3d1fcc2))
+* support setting headers via env ([10bd63e](https://github.com/y2-intel/y2-go/commit/10bd63e51c2b9d4b40ddeec14fd0c817b0eb3b3f))
+
+
+### Bug Fixes
+
+* **go:** avoid panic when http.DefaultTransport is wrapped ([55727f0](https://github.com/y2-intel/y2-go/commit/55727f07fbe9357ebf72c2f43e435c221ccca628))
+* prevent duplicate ? in query params ([cce9ca3](https://github.com/y2-intel/y2-go/commit/cce9ca3827594184831e9856a6485d40ee23e754))
+
+
+### Chores
+
+* avoid embedding reflect.Type for dead code elimination ([fb83fc5](https://github.com/y2-intel/y2-go/commit/fb83fc5f263ad5c67f51c3be4cdd21a7d9ea74fc))
+* **ci:** skip lint on metadata-only changes ([0f65e40](https://github.com/y2-intel/y2-go/commit/0f65e40d71014e222df2f9e699942ea381cf8849))
+* **ci:** support opting out of skipping builds on metadata-only commits ([6a38c9e](https://github.com/y2-intel/y2-go/commit/6a38c9eba437ef726c5f0465915a8e1dc4921ae5))
+* **client:** fix multipart serialisation of Default() fields ([a8c9e98](https://github.com/y2-intel/y2-go/commit/a8c9e98a4fe30a86ffd14c35606ba85109fc985d))
+* **internal:** more robust bootstrap script ([3014456](https://github.com/y2-intel/y2-go/commit/3014456bab5fd1e4e020656b9fb10b4615509511))
+* **internal:** support default value struct tag ([ca31221](https://github.com/y2-intel/y2-go/commit/ca31221a96f0253b3a6de947de9dd8dac0d9a151))
+* redact api-key headers in debug logs ([d722e02](https://github.com/y2-intel/y2-go/commit/d722e021e8e69db97ef9c3ff87c909cfa8576761))
+* remove unnecessary error check for url parsing ([286386f](https://github.com/y2-intel/y2-go/commit/286386f98c59536baec42477a3cb7d3835374a62))
+* update docs for api:"required" ([029c823](https://github.com/y2-intel/y2-go/commit/029c823e9d19b197ee15631579b422825cffa4f8))
+
 ## 0.7.1 (2026-03-24)
 
 Full Changelog: [v0.7.0...v0.7.1](https://github.com/y2-intel/y2-go/compare/v0.7.0...v0.7.1)
